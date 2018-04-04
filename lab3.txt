@@ -1,14 +1,34 @@
 P1
-SELECT nombre FROM lab3.pelicula 
+SELECT nombre 
+FROM lab3.pelicula 
 WHERE anho BETWEEN 1980 AND 1990
 ORDER BY calificacion DESC;
 
 P2
-SELECT personaje FROM lab3.personaje,lab3.pelicula
-WHERE a_nombre='McKellen, Ian' AND p_nombre=nombre
+SELECT personaje 
+FROM lab3.personaje,lab3.pelicula
+WHERE a_nombre='DiCaprio, Leonardo' AND p_nombre=nombre
 ORDER BY anho;
 
 P3
 SELECT p_nombre FROM lab3.personaje,lab3.pelicula
 WHERE a_nombre='McKellen, Ian' AND p_nombre=nombre
 ORDER BY calificacion DESC;
+
+P4
+SELECT personaje       
+FROM lab3.actor,lab3.pelicula,lab3.personaje
+WHERE pelicula.nombre=p_nombre
+AND a_nombre=actor.nombre
+AND genero='F'
+AND anho BETWEEN 1990 AND 2000
+AND calificacion > '8.7';
+
+P5
+SELECT nombre,anho,calificacion FROM lab3.pelicula 
+WHERE nombre LIKE 'The Lord of the Rings%'
+ORDER BY calificacion;
+
+SELECT nombre,anho,calificacion FROM lab3.pelicula 
+WHERE nombre LIKE 'The Lord of the Rings%'
+ORDER BY anho;
