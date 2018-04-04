@@ -1,0 +1,9 @@
+P1
+SELECT nombre FROM lab3.pelicula 
+WHERE anho BETWEEN 1980 AND 1990
+ORDER BY calificacion DESC;
+
+P2
+SELECT personaje FROM lab3.personaje, lab3.pelicula
+WHERE a_nombre='Alan, Lori' AND p_nombre = nombre
+ORDER BY anho;
