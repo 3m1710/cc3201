@@ -1,0 +1,25 @@
+P1
+select count(nombre) 
+from lab3.actor;
+
+
+P2
+select distinct a_nombre from
+(select distinct p_nombre, calificacion from lab3.personaje, lab3.pelicula
+where p_nombre = nombre
+and p_anho = anho
+order by calificacion desc
+limit 10) as Tabla,
+lab3.actor, lab3.personaje
+where Tabla.p_nombre = personaje.p_nombre
+and a_nombre = nombre
+and genero = 'F';
+
+P3
+
+select a_nombre from
+(select count(a_nombre), p_nombre
+from lab3.personaje
+group by p_nombre) as cnt,
+lab3.actor
+
