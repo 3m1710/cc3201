@@ -26,15 +26,10 @@ AND anho between 1990 AND 2000
 AND calificacion > '8.7';
 
 P5
-select nombre,anho,calificacion 
+select nombre
 from lab3.pelicula 
 where nombre LIKE 'The Lord of the Rings%'
-order by calificacion;
-
-select nombre,anho,calificacion 
-from lab3.pelicula 
-where nombre LIKE 'The Lord of the Rings%'
-order by anho;
+order by calificacion desc, anho;
 
 P6
 select distinct p1.a_nombre 
@@ -44,17 +39,21 @@ and p1.personaje != p2.personaje
 and p1.p_nombre=p2.p_nombre;
 
 P7
-select p_nombre from lab3.personaje
+select p_nombre 
+from lab3.personaje
 where a_nombre = 'Thurman, Uma'
 intersect
-select p_nombre from lab3.personaje
+select p_nombre 
+from lab3.personaje
 where a_nombre like 'Jackson, Samuel L.';
 
 P8
-select p_nombre from lab3.personaje
+select p_nombre 
+from lab3.personaje
 where a_nombre = 'Thurman, Uma'
 except
-select p_nombre from lab3.personaje
+select p_nombre 
+from lab3.personaje
 where a_nombre like 'Jackson, Samuel L.';
 
 P9
@@ -70,7 +69,7 @@ and d1.p_nombre != d2.p_nombre
 and d1.nombre1 > d1.nombre2;
 
 P10
-select calificacion, nombre
+select nombre
 from lab3.pelicula
 order by calificacion desc
 limit 1;
