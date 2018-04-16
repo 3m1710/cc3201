@@ -14,7 +14,7 @@ where Tabla.p_nombre = personaje.p_nombre
 and a_nombre = nombre
 and genero = 'F';
 
-#P3: Las actrices que aparecen en m´as de 2 peliculas, ordenadas por cantidad de peliculas de mayor a menor.
+#P3: Las actrices que aparecen en mas de 2 peliculas, ordenadas por cantidad de peliculas de mayor a menor.
 select a_nombre from (
 select a_nombre, count(p_nombre)
 from lab3.personaje, lab3.actor
@@ -25,6 +25,15 @@ order by count desc;
 
 #P4: Los anhos en los que todas las peliculas tuvieron un rating superior a 8 y la calificacion promedio de ese anho. 
 #	 Los resultados deben ordenarse de forma descendiente respecto a la calificacion promedio.
+select anho, avg from (
+select anho, avg(calificacion) from lab3.pelicula 
+group by anho) as A
+where A.anho in (
+select anho from lab3.pelicula 
+except
+select anho from lab3.pelicula 
+where calificacion <= 8.0)
+order by avg desc;
 
 #P5: La cantidad de peliculas por decada, ordenadas por decada.
 
