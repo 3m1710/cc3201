@@ -2,7 +2,6 @@ P1
 select count(nombre) 
 from lab3.actor;
 
-
 P2
 select distinct a_nombre from
 (select distinct p_nombre, calificacion from lab3.personaje, lab3.pelicula
@@ -16,10 +15,11 @@ and a_nombre = nombre
 and genero = 'F';
 
 P3
-
-select a_nombre from
-(select count(a_nombre), p_nombre
-from lab3.personaje
-group by p_nombre) as cnt,
-lab3.actor
+select a_nombre from (
+select a_nombre, count(p_nombre)
+from lab3.personaje, lab3.actor
+where a_nombre = nombre and genero = 'F'
+group by a_nombre) as foo
+where count > 2
+order by count desc;
 
