@@ -1,0 +1,44 @@
+P1
+{nombre, anho, actor, personaje}
+{actor} -> {genero}
+{nombre, anho} -> {calificacion, estudio, ciudad}
+
+P2
+select * from lab5.pelicula as p1, lab5.pelicula as p2
+where p1.actor = p2.actor
+and p1.genero != p2.genero;
+
+select * from lab5.pelicula as p1, lab5.pelicula as p2
+where p1.nombre = p2.nombre
+and p1.anho = p2.anho and (
+p1.calificacion != p2.calificacion
+or p1.estudio != p2.estudio
+or p1.ciudad != p2.ciudad);
+
+P3
+Como se tiene {actor} -> {genero} y {nombre, anho} -> {calificacion, estudio, ciudad}, 
+no cumple 2NF ya que {actor} y {nombre, anho} son subconjuntos de la llave candidata.
+
+
+P4
+create table lab5_p.LP_JA_pelicula (
+	nombre varchar (255) not null,
+	anho integer not null,
+	calificacion float not null,
+	ciudad varchar (255) not null,
+	estudio varchar (255) not null,
+	primary key(nombre, anho)
+)
+
+create table lab5_p.LP_JA_actor (
+	nombre varchar (255) primary key,
+	genero varchar (1) not null
+)
+
+create table lab5_p.LP_JA_personaje (
+	p_nombre varchar (255) references lab5_p.LP_JA_pelicula(nombre),
+	p_anho integer lab5_p.LP_JA_pelicula(anho),
+	actor varchar (255) references lab5_p.LP_JA_actor(nombre),
+	personaje varchar (255) not null,
+	primary key(p_nombre, p_anho, actor, personaje)
+)
