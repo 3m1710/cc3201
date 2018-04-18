@@ -36,9 +36,10 @@ create table lab5_p.LP_JA_actor (
 )
 
 create table lab5_p.LP_JA_personaje (
-	p_nombre varchar (255) references lab5_p.LP_JA_pelicula(nombre),
-	p_anho integer lab5_p.LP_JA_pelicula(anho),
-	actor varchar (255) references lab5_p.LP_JA_actor(nombre),
+	p_nombre varchar (255) ,
+	p_anho integer ,
+	actor varchar (255) ,
 	personaje varchar (255) not null,
+	foreign key (p_nombre, p_anho) references lab5_p.LP_JA_pelicula(nombre, anho)
 	primary key(p_nombre, p_anho, actor, personaje)
 )
