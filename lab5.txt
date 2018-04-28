@@ -1,3 +1,5 @@
+#pelicula(nombre, anho, calificacion, estudio, ciudad, actor, personaje, genero)
+
 P1
 {nombre, anho, actor, personaje}
 {actor} -> {genero}
@@ -25,21 +27,25 @@ create table lab5_p.LP_JA_pelicula (
 	nombre varchar (255) not null,
 	anho integer not null,
 	calificacion float not null,
-	ciudad varchar (255) not null,
 	estudio varchar (255) not null,
+	ciudad varchar (255) not null,
 	primary key(nombre, anho)
 )
+insert into lab5_p.LP_JA_pelicula (select distinct nombre, anho, calificacion, estudio, ciudad from lab5.pelicula);
 
 create table lab5_p.LP_JA_actor (
 	nombre varchar (255) primary key,
 	genero varchar (1) not null
 )
+insert into lab5_p.LP_JA_actor (select distinct actor, genero from lab5.pelicula);
 
 create table lab5_p.LP_JA_personaje (
 	p_nombre varchar (255) ,
 	p_anho integer ,
 	actor varchar (255) ,
 	personaje varchar (255) not null,
-	foreign key (p_nombre, p_anho) references lab5_p.LP_JA_pelicula(nombre, anho)
+	foreign key (p_nombre, p_anho) references lab5_p.LP_JA_pelicula(nombre, anho),
 	primary key(p_nombre, p_anho, actor, personaje)
 )
+insert into lab5_p.LP_JA_personaje (select distinct nombre, anho, actor, personaje from lab5.pelicula);
+
