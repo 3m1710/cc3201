@@ -23,29 +23,29 @@ no cumple 2NF ya que {actor} y {nombre, anho} son subconjuntos de la llave candi
 
 
 P4
-create table lab5_p.LP_JA_pelicula (
+create table lab5_p.lp_ja_pelicula_2fn (
 	nombre varchar (255) not null,
 	anho integer not null,
 	calificacion float not null,
 	estudio varchar (255) not null,
 	ciudad varchar (255) not null,
 	primary key(nombre, anho)
-)
-insert into lab5_p.LP_JA_pelicula (select distinct nombre, anho, calificacion, estudio, ciudad from lab5.pelicula);
+);
+insert into lab5_p.lp_ja_pelicula_2fn (select distinct nombre, anho, calificacion, estudio, ciudad from lab5.pelicula);
 
-create table lab5_p.LP_JA_actor (
+create table lab5_p.lp_ja_actor_2fn (
 	nombre varchar (255) primary key,
 	genero varchar (1) not null
-)
-insert into lab5_p.LP_JA_actor (select distinct actor, genero from lab5.pelicula);
+);
+insert into lab5_p.lp_ja_actor_2fn (select distinct actor, genero from lab5.pelicula);
 
-create table lab5_p.LP_JA_personaje (
+create table lab5_p.lp_ja_personaje_2fn (
 	p_nombre varchar (255) ,
 	p_anho integer ,
 	actor varchar (255) ,
 	personaje varchar (255) not null,
-	foreign key (p_nombre, p_anho) references lab5_p.LP_JA_pelicula(nombre, anho),
+	foreign key (p_nombre, p_anho) references lab5_p.lp_ja_pelicula_2fn(nombre, anho),
 	primary key(p_nombre, p_anho, actor, personaje)
-)
-insert into lab5_p.LP_JA_personaje (select distinct nombre, anho, actor, personaje from lab5.pelicula);
+);
+insert into lab5_p.lp_ja_personaje_2fn (select distinct nombre, anho, actor, personaje from lab5.pelicula);
 
