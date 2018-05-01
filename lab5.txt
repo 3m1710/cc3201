@@ -1,4 +1,4 @@
-#pelicula(nombre, anho, calificacion, estudio, ciudad, actor, personaje, genero)
+pelicula(nombre, anho, calificacion, estudio, ciudad, actor, personaje, genero)
 
 P1
 {nombre, anho, actor, personaje}
@@ -49,3 +49,51 @@ create table lab5_p.lp_ja_personaje_2fn (
 );
 insert into lab5_p.lp_ja_personaje_2fn (select distinct nombre, anho, actor, personaje from lab5.pelicula);
 
+P5
+Al haber un estudio en una sola ciudad, en la tabla lab5_p.lp_ja_pelicula_2fn se generan nuevas dependencias funcionales
+teniendo como llave candidata {nombre, anho, estudio}, y nueva dependencia funcional {estudio} -> {ciudad}, esto no cumple
+2NF ya que {estudio} es subconjunto de la llave candidata, y como no cumple 2NF no cumple 3NF.
+
+Al haber un estudio en una sola ciudad, en la tabla lab5_p.lp_ja_pelicula_2fn se generan nuevas dependencias funcionales
+teniendo como llave candidata {nombre, anho}, y nueva dependencia funcional {estudio} -> {ciudad}, esto cumple
+2NF ya que estudio no es parte de la llave, pero no 3NF, porque ciudad depende de estudio.
+
+P6
+select * from lab5_p.lp_ja_pelicula_2fn as p1, lab5_p.lp_ja_pelicula_2fn as p2
+where p1.estudio = p2.estudio
+and p1.ciudad != p2.ciudad;
+
+
+P7
+create table lab5_p.lp_ja_pelicula_3fn (
+	nombre varchar (255) not null,
+	anho integer not null,
+	calificacion float not null,
+	estudio varchar (255) not null,
+	primary key(nombre, anho)
+);
+insert into lab5_p.lp_ja_pelicula_3fn (select distinct nombre, anho, calificacion, estudio from lab5_p.lp_ja_pelicula_2fn);
+
+create table lab5_p.lp_ja_estudio_3fn (
+	estudio varchar (255) primary key,
+	ciudad varchar (255) not null
+);
+insert into lab5_p.lp_ja_estudio_3fn (select distinct estudio, ciudad from lab5_p.lp_ja_pelicula_2fn);
+
+create table lab5_p.lp_ja_actor_3fn (
+	nombre varchar (255) primary key,
+	genero varchar (1) not null
+);
+insert into lab5_p.lp_ja_actor_3fn (select distinct nombre, genero from lab5_p.lp_ja_actor_2fn);
+
+create table lab5_p.lp_ja_personaje_3fn (
+	p_nombre varchar (255) ,
+	p_anho integer ,
+	actor varchar (255) ,
+	personaje varchar (255) not null,
+	foreign key (p_nombre, p_anho) references lab5_p.lp_ja_pelicula_3fn(nombre, anho),
+	primary key(p_nombre, p_anho, actor, personaje)
+);
+insert into lab5_p.lp_ja_personaje_3fn (select distinct p_nombre, p_anho, actor, personaje from lab5_p.lp_ja_personaje_2fn);
+
+P8	
