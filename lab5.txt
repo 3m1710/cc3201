@@ -1,5 +1,6 @@
-pelicula(nombre, anho, calificacion, estudio, ciudad, actor, personaje, genero)
-
+Lab5
+Integrantes: José Astorga
+             Lukas Pavez
 P1:
 
 Llave primaria:
@@ -107,5 +108,7 @@ create table lab5_p.lp_ja_personaje_3fn (
 insert into lab5_p.lp_ja_personaje_3fn (select distinct p_nombre, p_anho, actor, personaje from lab5_p.lp_ja_personaje_2fn);
 
 P8: 
+Las tablas lab5_p.lp_ja_actor_3fn, lab5_p.lp_ja_estudio_3fn y lab5_p.lp_ja_personaje_3fn estan en BCNF ya que tienen 
+una llave candidata y estan en 3NF. lab5_p.lp_ja_pelicula_3fn tambien lo es.
 
 
