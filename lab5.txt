@@ -1,11 +1,16 @@
 pelicula(nombre, anho, calificacion, estudio, ciudad, actor, personaje, genero)
 
-P1
+P1:
+
+Llave primaria:
 {nombre, anho, actor, personaje}
+
+Dependencias funcionales:
 {actor} -> {genero}
 {nombre, anho} -> {calificacion, estudio, ciudad}
 
-P2
+P2: Confirmar dependencias funcionales
+
 select * from lab5.pelicula as p1, lab5.pelicula as p2
 where p1.actor = p2.actor
 and p1.genero != p2.genero;
@@ -17,12 +22,16 @@ p1.calificacion != p2.calificacion
 or p1.estudio != p2.estudio
 or p1.ciudad != p2.ciudad);
 
-P3
+Estas consultas no entregan nada, lo que implica que las dependencias funcionales se cumplen.
+
+P3:
+
 Como se tiene {actor} -> {genero} y {nombre, anho} -> {calificacion, estudio, ciudad}, 
-no cumple 2NF ya que {actor} y {nombre, anho} son subconjuntos de la llave candidata.
+La tabla no cumple 2NF ya que {actor} y {nombre, anho} son subconjuntos de la llave candidata.
 
 
-P4
+P4: Crear las tablas 2NF (3 tablas)
+
 create table lab5_p.lp_ja_pelicula_2fn (
 	nombre varchar (255) not null,
 	anho integer not null,
@@ -49,22 +58,23 @@ create table lab5_p.lp_ja_personaje_2fn (
 );
 insert into lab5_p.lp_ja_personaje_2fn (select distinct nombre, anho, actor, personaje from lab5.pelicula);
 
-P5
-Al haber un estudio en una sola ciudad, en la tabla lab5_p.lp_ja_pelicula_2fn se generan nuevas dependencias funcionales
-teniendo como llave candidata {nombre, anho, estudio}, y nueva dependencia funcional {estudio} -> {ciudad}, esto no cumple
-2NF ya que {estudio} es subconjunto de la llave candidata, y como no cumple 2NF no cumple 3NF.
+P5:
 
 Al haber un estudio en una sola ciudad, en la tabla lab5_p.lp_ja_pelicula_2fn se generan nuevas dependencias funcionales
 teniendo como llave candidata {nombre, anho}, y nueva dependencia funcional {estudio} -> {ciudad}, esto cumple
 2NF ya que estudio no es parte de la llave, pero no 3NF, porque ciudad depende de estudio.
 
-P6
+P6:
+
 select * from lab5_p.lp_ja_pelicula_2fn as p1, lab5_p.lp_ja_pelicula_2fn as p2
 where p1.estudio = p2.estudio
 and p1.ciudad != p2.ciudad;
 
+Esta consulta no entrega nada, lo que implica que las dependencia funcional se cumple.
 
-P7
+P7: Creando tablas 3NF
+
+
 create table lab5_p.lp_ja_pelicula_3fn (
 	nombre varchar (255) not null,
 	anho integer not null,
@@ -96,4 +106,6 @@ create table lab5_p.lp_ja_personaje_3fn (
 );
 insert into lab5_p.lp_ja_personaje_3fn (select distinct p_nombre, p_anho, actor, personaje from lab5_p.lp_ja_personaje_2fn);
 
-P8	
+P8: 
+
+
