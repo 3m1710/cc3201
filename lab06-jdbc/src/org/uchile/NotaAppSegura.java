@@ -68,7 +68,7 @@ public class NotaAppSegura {
                 System.out.println("\n\n-- Datos --");
                 while (rs.next()){ // mover el cursor a la proxima posici�n (y devolver true si hay una tupla m�s)
                     System.out.println();
-                    System.out.print((rs.getFloat(1)-1)*100/6.0);
+                    System.out.print(Math.round((rs.getFloat(1)-1)*100/6.0));
                     System.out.print("\t");
                     for(int i=2; i<=rsm.getColumnCount(); i++){ // las columnas empiezan con 1
                         if(i!=2)
