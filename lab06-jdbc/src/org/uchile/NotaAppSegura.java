@@ -52,17 +52,6 @@ public class NotaAppSegura {
                 int in = Integer.parseInt(input);
                 pSt.setInt(1, in);
 
-                System.out.println("Ingrese un comentario y pulse [Intro] (o [q]+[Intro] para no agregar comentario) (o '"+KILL+"' para matar):");
-
-                String comment = br.readLine().trim();
-                if(comment.equals(KILL)) break;
-                if(!comment.equals("q")){
-                    pSt2.setString(1, comment);
-                    pSt2.setInt(2, in);
-                    System.out.println("=== Ejeuctando la consulta: "+pSt2+" ===");
-                    pSt2.executeUpdate();
-                }
-
                 // executar una consulta
                 System.out.println("=== Ejeuctando la consulta: "+pSt+" ===");
                 ResultSet rs = pSt.executeQuery();
@@ -90,6 +79,42 @@ public class NotaAppSegura {
                 }
 
                 System.out.println("\n==============================\n\n\n");
+
+                System.out.println("Ingrese un comentario y pulse [Intro] (o [q]+[Intro] para no agregar comentario) (o '"+KILL+"' para matar):");
+
+                String comment = br.readLine().trim();
+                if(comment.equals(KILL)) break;
+                if(!comment.equals("q")){
+                    pSt2.setString(1, comment);
+                    pSt2.setInt(2, in);
+                    System.out.println("=== Ejeuctando la consulta: "+pSt2+" ===");
+                    pSt2.executeUpdate();
+
+                    System.out.println("=== Resultados ===");
+
+                    System.out.println("\n-- Esquema --");
+
+                    for(int i=1; i<=rsm.getColumnCount(); i++){ // las columnas empiezan con 1
+                        if(i!=1)
+                            System.out.print("\t");
+                        System.out.print(rsm.getColumnLabel(i)+":"+rsm.getColumnTypeName(i));
+                    }
+
+                    rs = pSt.executeQuery();
+                    System.out.println("\n\n-- Datos --");
+                    while (rs.next()){ // mover el cursor a la proxima posici�n (y devolver true si hay una tupla m�s)
+                        System.out.println();
+                        System.out.print(Math.round((rs.getFloat(1)-1)*100/6.0));
+                        System.out.print("\t");
+                        for(int i=2; i<=rsm.getColumnCount(); i++){ // las columnas empiezan con 1
+                            if(i!=2)
+                                System.out.print("\t");
+                            System.out.print(rs.getString(i));
+                        }
+                    }
+                    System.out.println("\n==============================\n\n\n");
+                }
+
                 rs.close();
             }
         } catch(Exception e){

