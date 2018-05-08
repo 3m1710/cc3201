@@ -41,15 +41,27 @@ public class NotaAppSegura {
         // luego reemplezaremos los '?' con los valores de entrada
         PreparedStatement pSt = conn.prepareStatement("SELECT nota, nombre, comentario FROM nota.bdd2018 WHERE id=?");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in,"utf-8"));
+        PreparedStatement pSt2 = conn.prepareStatement("update nota.bdd2018 set comentario=? where id=?");
 
         try{
             while(true){
-                System.out.println("Ingrese un apellido paterno y pulse [Intro] (o '"+KILL+"' para matar):");
+                System.out.println("Ingrese una id y pulse [Intro] (o '"+KILL+"' para matar):");
 
                 String input = br.readLine().trim();
                 if(input.equals(KILL)) break;
                 int in = Integer.parseInt(input);
                 pSt.setInt(1, in);
+
+                System.out.println("Ingrese un comentario y pulse [Intro] (o [q]+[Intro] para no agregar comentario) (o '"+KILL+"' para matar):");
+
+                String comment = br.readLine().trim();
+                if(comment.equals(KILL)) break;
+                if(!comment.equals("q")){
+                    pSt2.setString(1, comment);
+                    pSt2.setInt(2, in);
+                    System.out.println("=== Ejeuctando la consulta: "+pSt2+" ===");
+                    pSt2.executeUpdate();
+                }
 
                 // executar una consulta
                 System.out.println("=== Ejeuctando la consulta: "+pSt+" ===");
@@ -85,6 +97,7 @@ public class NotaAppSegura {
         } finally {
             try{
                 pSt.close();
+                pSt2.close();
                 br.close();
             } finally {
                 conn.close();
