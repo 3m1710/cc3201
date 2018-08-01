@@ -1,0 +1,49 @@
+#P1: La cantidad de actores y actrices en la base de datos.
+select count(nombre) 
+from lab3.actor;
+
+#P2: Los nombres (distintos) de las actrices que participaron en las 10 peliculas mejor calificadas.
+select distinct a_nombre from
+(select distinct p_nombre, calificacion from lab3.personaje, lab3.pelicula
+where p_nombre = nombre
+and p_anho = anho
+order by calificacion desc
+limit 10) as Tabla,
+lab3.actor, lab3.personaje
+where Tabla.p_nombre = personaje.p_nombre
+and a_nombre = nombre
+and genero = 'F';
+
+#P3: Las actrices que aparecen en mas de 2 peliculas, ordenadas por cantidad de peliculas de mayor a menor.
+select a_nombre from (
+select a_nombre, count(p_nombre)
+from lab3.personaje, lab3.actor
+where a_nombre = nombre and genero = 'F'
+group by a_nombre) as foo
+where count > 2
+order by count desc;
+
+#P4: Los anhos en los que todas las peliculas tuvieron un rating superior a 8 y la calificacion promedio de ese anho. 
+#	 Los resultados deben ordenarse de forma descendiente respecto a la calificacion promedio.
+select anho, avg from (
+select anho, avg(calificacion) from lab3.pelicula 
+group by anho) as A
+where A.anho in (
+select anho from lab3.pelicula 
+except
+select anho from lab3.pelicula 
+where calificacion <= 8.0)
+order by avg desc;
+
+#P5: La cantidad de peliculas por decada, ordenadas por decada.
+
+#P6: La(s) pelicula(s) con mayor cantidad de actrices. Si hay empates debe entregarlos todos.
+
+#P7: Una tabla de 2 columnas, una para ‘Star Wars: Episode V - The Empire Strikes Back’ (1980) y otra
+#	 para ‘Star Wars: Episode VI - Return of the Jedi’ (1983) tal que cada actor o actriz aparezca en las
+#	 columnas de las peliculas en las que aparece. Si el actor aparece en solo una de las dos, debe rellenar
+#	 la otra con NULL.
+	
+#P8: Filtre la tabla anterior y muestre solo los actores y actrices que aparecen en una de las dos peliculas.
+
+#P9: Ordene las peliculas por la razon actrices/actores totales de mayor a menor.
