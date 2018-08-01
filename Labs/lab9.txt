@@ -1,0 +1,42 @@
+CREATE TABLE lab9p.g8_Estado (
+    nombre varchar (255) primary key,
+    voto_electoral smallint,
+    cierre time,
+    num_candidatos smallint,
+    reportado float
+);
+
+INSERT INTO lab9p.g8_Estado SELECT * FROM lab9.Estado;
+
+CREATE TABLE lab9p.g8_Condado (
+    nombre varchar (255),
+    estado varchar (255) references lab9p.g8_Estado(nombre),
+    reportado float,
+    primary key (nombre, estado),
+    check(reportado between 0 and 1)
+);
+
+INSERT INTO lab9p.g8_Condado SELECT * FROM lab9.Condado;
+
+CREATE TABLE lab9p.g8_Candidato (
+    nombre varchar (255) primary key,
+    partido varchar (255)
+);
+
+INSERT INTO lab9p.g8_Candidato SELECT * FROM lab9.Candidato;
+
+CREATE TABLE lab9p.g8_VotosPorCondado (
+    candidato varchar (255) references lab9p.g8_Candidato(nombre),
+    condado varchar (255),
+    estado varchar (255),
+    votos int,
+    foreign key (condado, estado) references lab9p.g8_Condado(nombre, estado),
+    primary key (candidato, condado, estado)
+);
+
+update lab9p.g8_VotosPorCondado v1
+set votos = v2.votos from lab9.voto1 v2
+where v1.candidato = v2.candidato
+and v1.condado = v2.condado
+and v1.estado = v2.estado;
+
