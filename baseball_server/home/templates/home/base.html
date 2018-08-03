@@ -1,0 +1,38 @@
+{# HTML5 declaration #}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>CC3201 G8</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'home/css/custom.css' %}">
+
+{% block js_css %}
+{% endblock js_css %}
+
+</head>
+<body>
+
+<div id="superiorbar">
+<ul>
+  <li><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  
+  <li style="float:right"><a class="active" href="{% url 'about' %}">About</a></li>
+</ul>
+</div>
+
+
+	{% block content %}
+	{% endblock content %}
+
+</body>
+
+</html>
+
+
+

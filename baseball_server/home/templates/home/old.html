@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<html>
+
+<head>
+<title>CC3201 G8</title>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel="stylesheet" href="{% static 'home/css/custom.css' %}">
+
+<script type="text/javascript">
+	function openNav(element) {
+	    document.getElementById(element).style.height = "86%";}
+
+	function closeNav(element) {
+	document.getElementById(element).style.height = "0%";}
+</script>
+
+</head>
+<body>
+
+<div id="superiorbar">
+<ul>
+  <li><a href="">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li style="float:right"><a class="active" href="#about" onclick="openNav('about')">About</a></li>
+</ul>
+</div>
+
+
+<div class="wrapper">
+	<h1 style="padding: 10px; text-align: center"> Ready to do crazy baseball queries! </h1>
+	<p>chaitoasda.</p>
+
+
+</div>
+
+<div id="about" class="about">
+<h1 style="padding: 10px; text-align: center"> Important things </h1>
+	<p>chaitoasda.</p>
+
+</div>
+
+</body>
+
+</html>
+
+
+
