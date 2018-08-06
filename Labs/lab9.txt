@@ -161,3 +161,21 @@ set reportado = v.reportado from lab9.condado9 v
 where vpc.nombre = v.nombre
 and vpc.estado = v.estado;
 commit;
+
+
+##################### P10 #####################
+
+start transaction;
+update lab9p.g8_VotosPorCondado vpc
+set votos = v.votos from lab9.votox v
+where vpc.candidato = v.candidato
+and vpc.condado = v.condado
+and vpc.estado = v.estado;
+
+update lab9p.g8_Condado vpc
+set reportado = v.reportado from lab9.condadox v
+where vpc.nombre = v.nombre
+and vpc.estado = v.estado;
+commit;
+
+No lo logro, porque viola la restriciion de que reportado este entre 0 y 1
