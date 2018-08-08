@@ -1,0 +1,37 @@
+################## P1 ##################
+//province/@name
+
+################## P2 ##################
+//city/name
+
+################## P3 ##################
+//city/name/text()
+
+################## P4 ##################
+//country[@name='Chile']
+
+################## P5 ##################
+//province[@name='Ceara']/city/name/text()
+
+################## P6 ##################
+//province[@name='Ontario']/city[4]/name/text()
+
+################## P7 ##################
+//province[@name='Guanajuato']/city[count(//province[@name='Guanajuato']/city)-2]/name/text()
+
+################## P8 ##################
+//country/city[normalize-space(name/text())="Port-au-Prince"]/population/text()
+
+################## P9 ##################
+//city[@latitude > 0 and population > 1000000]
+
+################## P10 ##################
+
+################## P11 ##################
+
+################## P12 ##################
+//country[normalize-space(name/text())="Uruguay"]/@gdp_ind
+
+################## P13 ##################
+
+################## P14 ##################
