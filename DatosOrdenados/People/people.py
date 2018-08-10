@@ -4,15 +4,28 @@
 import csv
 
 
+def get_date(year, month="", day=""):
+	if year != "":
+		date = str(year)
+		if month!="":
+			date = date + "-" + str(month)
+
+			if day!="":
+				date= date + "-" + str(day)
+		return date
+	else: 
+		return ""
+
 paises = {'D.R.': 'Dominican Republic', 'CAN': 'Canada', 'P.R.':'Puerto Rico'}
 
-file1 = open('../People.csv', 'rb')
+file1 = open('../../DatosOriginales/People.csv', 'rb')
 
 original_fields = ['playerID', 'birthYear', 'birthMonth','birthDay','birthCountry','birthState','birthCity','deathYear','deathMonth','deathDay','deathCountry','deathState','deathCity','nameFirst','nameLast','nameGiven','weight','height','bats','throws','debut','finalGame','retroID','bbrefID']
 reader = csv.DictReader(file1, delimiter=',', fieldnames=original_fields)
 
 file2 = open('People.csv', 'wb')
-fieldnames = ['personID', 'givenName','lastName','birthDate', 'birthCountry', 'birthState', 'birthCity', 'deathDate','deathCountry', 'deathState','deathCity', 'height','weight','bats','throws', 'debut','finalGame']
+#fieldnames = ['personID', 'givenName','lastName','birthDate', 'birthCountry', 'birthState', 'birthCity', 'deathDate','deathCountry', 'deathState','deathCity', 'height','weight','bats','throws', 'debut','finalGame']
+fieldnames = ['personID', 'givenName','lastName','birthDate', 'birthCountry', 'height','weight','bats','throws', 'debut','finalGame']
 
 writer = csv.DictWriter(file2, delimiter=',', fieldnames=fieldnames)
 writer.writeheader()  
@@ -24,10 +37,10 @@ for row in reader:
 	new_row['personID']  = row['playerID']
 	new_row['givenName'] = row['nameGiven']
 	new_row['lastName']  = row['nameLast']	
-	new_row['birthState'] 	= row['birthState']
-	new_row['birthCity'] 	= row['birthCity']
-	new_row['deathState'] 	= row['deathState']
-	new_row['deathCity']	= row['deathCity']
+	#new_row['birthState'] 	= row['birthState']
+	#new_row['birthCity'] 	= row['birthCity']
+	#new_row['deathState'] 	= row['deathState']
+	#new_row['deathCity']	= row['deathCity']
 
 	if row['weight']:
 		new_row['weight'] =  "{0:.2f}".format(float(row['weight'])*0.453592)
@@ -50,21 +63,21 @@ for row in reader:
 	else:
 		new_row['birthCountry'] = row['birthCountry']
 
-	if row['deathCountry'] in paises:
-		new_row['deathCountry'] = paises[row['deathCountry']]
-	else:
-		new_row['deathCountry'] = row['deathCountry']
+	#if row['deathCountry'] in paises:
+	#	new_row['deathCountry'] = paises[row['deathCountry']]
+	#else:
+	#	new_row['deathCountry'] = row['deathCountry']
 
 
 	if row['birthYear']:
-		new_row['birthDate'] =  row['birthYear'] + "-" + row['birthMonth'] + "-" + row['birthDay'] 
+		new_row['birthDate'] =  get_date( row['birthYear'], row['birthMonth'], row['birthDay'] )
 	else:
 		new_row['birthDate'] = ""
 	
-	if row['deathYear']:
-		new_row['deathDate'] =  row['deathYear'] + "-" + row['deathMonth'] + "-" + row['deathDay'] 
-	else:
-		new_row['deathDate'] = ""
+	#if row['deathYear']:
+	#	new_row['deathDate'] =  get_date( row['deathYear'], row['deathMonth'], row['deathDay'] )
+	#else:
+	#	new_row['deathDate'] = ""
 
 	writer.writerow(new_row)
 
