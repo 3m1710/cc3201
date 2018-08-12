@@ -9,15 +9,23 @@ def get_date(year, month="", day=""):
 		date = str(year)
 		if month!="":
 			date = date + "-" + str(month)
-
 			if day!="":
+
 				date= date + "-" + str(day)
+			else:
+				date= date + "-01"
+				print("AÑO sin MES")
+
+		else:
+			print("AÑO sin MES")
+			date= date + "-01-01"			
 		return date
 	else: 
+		print("NO FECHA")
 		return ""
 
-paises = {'D.R.': 'Dominican Republic', 'CAN': 'Canada', 'P.R.':'Puerto Rico'}
 
+paises = {'D.R.': 'Dominican Republic', 'CAN': 'Canada', 'P.R.':'Puerto Rico'}
 file1 = open('../../DatosOriginales/People.csv', 'rb')
 
 original_fields = ['playerID', 'birthYear', 'birthMonth','birthDay','birthCountry','birthState','birthCity','deathYear','deathMonth','deathDay','deathCountry','deathState','deathCity','nameFirst','nameLast','nameGiven','weight','height','bats','throws','debut','finalGame','retroID','bbrefID']
@@ -25,7 +33,7 @@ reader = csv.DictReader(file1, delimiter=',', fieldnames=original_fields)
 
 file2 = open('People.csv', 'wb')
 #fieldnames = ['personID', 'givenName','lastName','birthDate', 'birthCountry', 'birthState', 'birthCity', 'deathDate','deathCountry', 'deathState','deathCity', 'height','weight','bats','throws', 'debut','finalGame']
-fieldnames = ['personID', 'givenName','lastName','birthDate', 'birthCountry', 'height','weight','bats','throws', 'debut','finalGame']
+fieldnames = ['personID', 'givenName','lastName','birthDate', 'birthCountry', 'weight','height','bats','throws', 'debut','finalGame']
 
 writer = csv.DictWriter(file2, delimiter=',', fieldnames=fieldnames)
 writer.writeheader()  
@@ -71,6 +79,7 @@ for row in reader:
 
 	if row['birthYear']:
 		new_row['birthDate'] =  get_date( row['birthYear'], row['birthMonth'], row['birthDay'] )
+	
 	else:
 		new_row['birthDate'] = ""
 	
@@ -83,5 +92,4 @@ for row in reader:
 
 file1.close()   # <---IMPORTANT
 
-# Do the writing
 file2.close()
