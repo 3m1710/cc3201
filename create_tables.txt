@@ -85,14 +85,14 @@ PPF int,
 primary key (yearID, teamID)
 );
 
-copy People FROM '/home/cc3201/cc3201/DatosOrdenados/Teams/Teams.csv' DELIMITER ',' CSV HEADER;
+copy teans FROM '/home/cc3201/cc3201/DatosOrdenados/Teams/Teams.csv' DELIMITER ',' CSV HEADER;
 
 
 CREATE TABLE PlayerAppearances (
 yearID int,
 teamID varchar (255),
 playerID varchar (255),
-#lgID varchar (255),
+--lgID varchar (255),
 G_all int,
 GS int,
 G_batting int,
@@ -119,17 +119,17 @@ copy PlayerAppearances FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Appearan
 
 
 CREATE TABLE Batting (
-yearID int,
 playerID varchar (255),
+yearID int,
 stint int,
 teamID varchar (255),
-#lgID varchar (255),
+-- lgID varchar (255),
 G int,
 AB int,
 R int,
 H int,
-2B int,
-3B int,
+"2B" int,
+"3B" int,
 HR int,
 RBI int,
 SB int,
@@ -141,11 +141,11 @@ HBP int,
 SH int,
 SF int,
 GIDP int,
-primary key (yearID, teamID, playerID),
+primary key ( playerID, yearID, teamID, stint),
 foreign key (teamID, yearID) references Teams(teamID, yearID),
 foreign key (playerID) references People(peopleID)
-
 );
+copy batting FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Batting.csv' DELIMITER ',' CSV HEADER;
 
 
 CREATE TABLE Fielding (
@@ -153,7 +153,7 @@ playerID varchar (255),
 yearID int,
 stint int,
 teamID varchar (255),
-#lgID varchar (255),
+-- lgID varchar (255),
 POS varchar (255),
 G int,
 GS int,
@@ -167,18 +167,19 @@ WP int,
 SB int,
 CS int,
 ZR int,
-primary key (yearID, teamID, playerID),
+primary key (playerID, yearID, teamID , stint, pos),
 foreign key (teamID, yearID) references Teams(teamID, yearID),
 foreign key (playerID) references People(peopleID)
 );
 
+copy fielding FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Fielding.csv' DELIMITER ',' CSV HEADER;
 
 CREATE TABLE Pitching (
 playerID varchar (255),
 yearID int,
 stint int,
 teamID varchar (255),
-#lgID varchar (255),
+-- lgID varchar (255),
 W int,
 L int,
 G int,
@@ -209,12 +210,13 @@ foreign key (teamID, yearID) references Teams(teamID, yearID),
 foreign key (playerID) references People(peopleID)
 );
 
+copy pitching FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Pitching.csv' DELIMITER ',' CSV HEADER;
 
 CREATE TABLE Managers (
 playerID varchar (255),
 yearID int,
 teamID varchar (255),
-#lgID varchar (255),
+-- lgID varchar (255),
 inseason int,
 G int,
 W int,
@@ -225,6 +227,7 @@ primary key (yearID, teamID, playerID),
 foreign key (teamID, yearID) references Teams(teamID, yearID),
 foreign key (playerID) references People(peopleID)
 );
+copy pitching FROM '/home/cc3201/cc3201/DatosOrdenados/Manager/Managers.csv' DELIMITER ',' CSV HEADER;
 
 
 CREATE TABLE AwardsManagerVotes (
@@ -332,3 +335,17 @@ foreign key (playerID) references People(peopleID)
 -- primary key (season),
 -- foreign key (MVP) references People(peopleID)
 -- );
+
+
+#########
+## NOTAS de implementación
+
+## Player Apparecences <- thompan01 not in player  - 53 sb as float
+
+## Batting Se añade stint a llave primaria por linea 217
+
+## Pitching : - hbp 468 float
+			  #-Se agrega stint a llave primaria por 342 
+
+
+## Fielding: - Se agrega pos a llave primaria por 4
