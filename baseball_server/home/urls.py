@@ -6,5 +6,7 @@ urlpatterns = [
 	url(r'^$', index),
 	url(r'^about/', about, name="about"),
 	url(r'^home/', index, name="home"),
+	url(r'^home/', index, name="BD"),
+
 	url(r'^index/', index)
 ]
