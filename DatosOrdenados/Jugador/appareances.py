@@ -6,13 +6,13 @@ import csv
 
 file1 = open('../../DatosOriginales/Appearances.csv', 'rb')
 
-original_fields = ['yearID','teamID','lgID','playerID','G_all','GS','G_batting','G_defense','G_p','G_c','G_1b','G_2b','G_3b','G_ss','G_lf','G_cf','G_r']
+original_fields = ['yearID','teamID','lgID','playerID','G_all','GS','G_batting','G_defense','G_p','G_c','G_1b','G_2b','G_3b','G_ss','G_lf','G_cf','G_r','G_of','G_dh','G_ph','G_pr']
 reader = csv.DictReader(file1, delimiter=',', fieldnames=original_fields)
 
 
 file2 = open('Appearances.csv', 'wb')
 fieldnames = ['yearID','teamID',#'lgID',
-			  'playerID','G_all','GS','G_batting','G_defense','G_p','G_c','G_1b','G_2b','G_3b','G_ss','G_lf','G_cf','G_r']
+			  'playerID','G_all','GS','G_batting','G_defense','G_p','G_c','G_1b','G_2b','G_3b','G_ss','G_lf','G_cf','G_r','G_of','G_dh','G_ph','G_pr']
 writer = csv.DictWriter(file2, delimiter=',', fieldnames=fieldnames)
 writer.writeheader()  
 
@@ -36,6 +36,10 @@ for row in reader:
 	new_row['G_lf'] = row['G_lf']
 	new_row['G_cf'] = row['G_cf']
 	new_row['G_r'] = row['G_r']
+	new_row["G_of"] = row["G_of"]
+	new_row["G_dh"] = row["G_dh"]
+	new_row["G_ph"] = row["G_ph"]
+	new_row["G_pr"] = row["G_pr"]
 	
 	writer.writerow(new_row)
 

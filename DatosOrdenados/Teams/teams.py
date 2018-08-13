@@ -14,11 +14,6 @@ file2 = open('Teams.csv', 'wb')
 fieldnames = ["yearID","lgID","divID","teamID","name","franchID","Rank","G","GHome","W","L","DivWin","WCWin","LgWin","WSWin","R","AB","H","2B","3B","HR","BB","SO","SB","CS","HBP","SF","RA","ER","ERA","CG","SHO","SV","IPOuts","HA","HRA","BBA","SOA","E","DP","FP","park","attendance","BPF","PPF"]
 writer = csv.DictWriter(file2, delimiter=',', fieldnames=fieldnames)
 writer.writeheader()  
-
-next(reader)
-
-
-
 Teams = {}
 next(reader)
 for row in reader:		
