@@ -81,9 +81,9 @@ def consultar_jugador(lastname, givenname, middlename):
         if lastname=="":
             cursor.execute("SELECT * FROM people")            
         elif name == "":
-            cursor.execute("SELECT * FROM people WHERE lastname = %s", [lastname])
+            cursor.execute("SELECT * FROM people WHERE last_name = %s", [lastname])
         else:
-            cursor.execute("SELECT * FROM people WHERE lastname = %s and givenname like %s", [lastname, name])
+            cursor.execute("SELECT * FROM people WHERE last_name = %s and given_name like %s", [lastname, name])
         
         results = dictfetchall(cursor)
     return results

@@ -142,5 +142,8 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+
+*.~lock*
 # End of https://www.gitignore.io/api/java,intellij
 
