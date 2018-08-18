@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="{% static 'home/css/custom.css' %}">
-
+<!-- <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" /> -->
 {% block js_css %}
 {% endblock js_css %}
 
@@ -20,7 +20,9 @@
 <ul>
   <li><a href="{% url 'home' %}">Home</a></li>
 
-  <li><a href="{% url 'BD' %}">Base Datos</a></li>
+  <!-- <li><a href="{% url 'BD' %}">Base Datos</a></li> -->
+  
+  <li><a href="{% url 'jugadores' %}"> Buscar Jugadores </a></li>
   
   <li style="float:right"><a class="active" href="{% url 'about' %}">About</a></li>
 </ul>

@@ -3,9 +3,11 @@ body  {
     background-image: url("../img/img6.jpg");
     background-color: #cccccc;
     background-repeat: repeat;
-    background-position: center; 
+    background-position: center center;
     background-attachment: fixed;
-    background-size: 1200px 680px;
+
+    /*background-repeat: no-repeat;*/
+
 
 }
 
@@ -71,3 +73,17 @@ body  {
 #superiorbar .active {
     background-color: #4CAF50;
 }
+
+.horizontal{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ 
+.horizontal li{
+     float: left;}
+

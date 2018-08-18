@@ -1,0 +1,74 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+{% load render_table from django_tables2 %}
+
+
+{% block js_css %}
+<!--<link rel="stylesheet" href="{% static 'home/css/table.css' %}">-->
+<link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+
+{% endblock js_css %}
+
+
+{% block content %}
+<!-- 
+<form action="" method="post">
+    {% csrf_token %}
+    {{ player_form.as_ul }}
+    <input type="submit" value="Submit" />
+</form> -->
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ player_form.non_field_errors }}
+
+    <ul   style="list-style-type: none;">
+
+    <li>
+    	<ul class="horizontal">
+	    <li>
+			<div class="fieldWrapper">
+			    {{ player_form.apellido.errors }}
+			    <label for="{{ player_form.apellido.id_for_label }}"> Apellido:</label>
+			    {{ player_form.apellido }}
+			</div>
+	    </li>
+	    <li>
+
+			<div class="fieldWrapper">
+			    {{ player_form.nombre.errors }}
+			    <label for="{{ player_form.nombre.id_for_label }}"> Primer Nombre: </label>
+			    {{ player_form.nombre }}
+			</div>
+	    </li>
+	    <li>
+			
+			<div class="fieldWrapper">
+			    {{ player_form.nombre2.errors }}
+			    <label for="{{ player_form.nombre2.id_for_label }}"> Segundo Nombre: </label>
+			    {{ player_form.nombre2 }}
+			</div>
+		</li>
+		</ul>
+	</li>
+
+
+	<li>
+		<div class="fieldWrapper">
+		    {{ player_form.ordenar.errors }}
+		    <label for="{{ player_form.ordenar.id_for_label }}"> Ordenar por</label>
+		    {{ player_form.ordenar }}
+		</div>
+	</li>
+	</ul>
+
+    <input type="submit" value="Submit" />
+</form>
+
+
+{% if resultados%}
+        {%render_table resultados%}
+{%endif%}
+{% endblock content %}
