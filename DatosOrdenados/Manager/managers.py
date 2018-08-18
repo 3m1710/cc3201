@@ -12,7 +12,7 @@ reader = csv.DictReader(file1, delimiter=',', fieldnames=original_fields)
 
 file2 = open('Managers.csv', 'wb')
 fieldnames = ['playerID','yearID','teamID',#'lgID',
-			  'inseason','G','W','L','rank','plyrMgr']
+			  'inseason','G','W','L']#,'rank','plyrMgr']
 
 writer = csv.DictWriter(file2, delimiter=',', fieldnames=fieldnames)
 writer.writeheader()  
@@ -28,8 +28,8 @@ for row in reader:
 	new_row['G'] = row['G']
 	new_row['W'] = row['W']
 	new_row['L'] = row['L']
-	new_row['rank'] = row['rank']
-	new_row['plyrMgr'] = row['plyrMgr']
+	# new_row['rank'] = row['rank']
+	# new_row['plyrMgr'] = row['plyrMgr']
 	
 	writer.writerow(new_row)
 

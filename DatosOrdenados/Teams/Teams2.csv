@@ -1,0 +1,184 @@
+teamID,name,season_debut,franchName
+BS1,Boston Red Stockings,1871,Boston Red Stockings
+CH1,Chicago White Stockings,1871,Chicago White Stockings
+CL1,Cleveland Forest Citys,1871,Cleveland Forest Citys
+FW1,Fort Wayne Kekiongas,1871,Fort Wayne Kekiongas
+NY2,New York Mutuals,1871,New York Mutuals
+PH1,Philadelphia Athletics,1871,Philadelphia Athletics
+RC1,Rockford Forest Citys,1871,Rockford Forest Citys
+TRO,Troy Haymakers,1871,Troy Haymakers
+WS3,Washington Olympics,1871,Washington Olympics
+BL1,Baltimore Canaries,1872,Baltimore Canaries
+BR1,Brooklyn Eckfords,1872,Brooklyn Eckfords
+BR2,Brooklyn Atlantics,1872,Brooklyn Atlantics
+MID,Middletown Mansfields,1872,Middletown Mansfields
+WS4,Washington Nationals,1872,Washington Nationals
+BL4,Baltimore Marylands,1873,Baltimore Marylands
+ELI,Elizabeth Resolutes,1873,Elizabeth Resolutes
+PH2,Philadelphia Whites,1873,Philadelphia White Stockings
+WS5,Washington Blue Legs,1873,Washington Blue Legs
+CH2,Chicago White Stockings,1874,Chicago White Stockings
+HR1,Hartford Dark Blues,1874,Hartford Dark Blues
+KEO,Keokuk Westerns,1875,Keokuk Westerns
+NH1,New Haven Elm Citys,1875,New Haven Elm Citys
+PH3,Philadelphia Centennials,1875,Philadelphia Centennials
+SL1,St. Louis Red Stockings,1875,St. Louis Red Stockings
+SL2,St. Louis Brown Stockings,1875,St. Louis Brown Stockings
+WS6,Washington Nationals,1875,Washington Nationals
+BSN,Boston Red Caps,1876,Atlanta Braves
+CHN,Chicago White Stockings,1876,Chicago Cubs
+CN1,Cincinnati Reds,1876,Cincinnati Reds
+HAR,Hartford Dark Blues,1876,Hartford Dark Blues
+LS1,Louisville Grays,1876,Louisville Grays
+NY3,New York Mutuals,1876,New York Mutuals
+PHN,Philadelphia Athletics,1876,Philadelphia Athletics
+SL3,St. Louis Brown Stockings,1876,St. Louis Brown Stockings
+IN1,Indianapolis Blues,1878,Indianapolis Blues
+ML2,Milwaukee Grays,1878,Milwaukee Grays
+PRO,Providence Grays,1878,Providence Grays
+BFN,Buffalo Bisons,1879,Buffalo Bisons
+CL2,Cleveland Blues,1879,Cleveland Blues
+SR1,Syracuse Stars,1879,Syracuse Stars
+TRN,Troy Trojans,1879,Troy Trojans
+WOR,Worcester Ruby Legs,1880,Worcester Ruby Legs
+DTN,Detroit Wolverines,1881,Detroit Wolverines
+BL2,Baltimore Orioles,1882,Baltimore Orioles
+CN2,Cincinnati Red Stockings,1882,Cincinnati Reds
+LS2,Louisville Eclipse,1882,Louisville Colonels
+PH4,Philadelphia Athletics,1882,Philadelphia Athletics
+PT1,Pittsburg Alleghenys,1882,Pittsburgh Pirates
+SL4,St. Louis Brown Stockings,1882,St. Louis Cardinals
+BSN,Boston Beaneaters,1883,Atlanta Braves
+CL5,Columbus Buckeyes,1883,Columbus Buckeyes
+NY1,New York Gothams,1883,San Francisco Giants
+NY4,New York Metropolitans,1883,New York Metropolitans
+PHI,Philadelphia Quakers,1883,Philadelphia Phillies
+SL4,St. Louis Browns,1883,St. Louis Cardinals
+ALT,Altoona Mountain City,1884,Altoona Mountain City
+BLU,Baltimore Monumentals,1884,Baltimore Monumentals
+BR3,Brooklyn Atlantics,1884,Los Angeles Dodgers
+BSU,Boston Reds,1884,Boston Reds
+CHU,Chicago/Pittsburgh (Union League),1884,Chicago/Pittsburgh (Union League)
+CNU,Cincinnati Outlaw Reds,1884,Cincinnati Outlaw Reds
+IN2,Indianapolis Hoosiers,1884,Indianapolis Hoosiers
+KCU,Kansas City Cowboys,1884,Kansas City Cowboys
+MLU,Milwaukee Brewers,1884,Milwaukee Brewers
+PHU,Philadelphia Keystones,1884,Philadelphia Keystones
+RIC,Richmond Virginians,1884,Richmond Virginians
+SLU,St. Louis Maroons,1884,St. Louis Maroons
+SPU,St. Paul White Caps,1884,St. Paul Apostles
+TL1,Toledo Blue Stockings,1884,Toledo Blue Stockings
+WIL,Wilmington Quicksteps,1884,Wilmington Quicksteps
+WS7,Washington Nationals,1884,Washington Statesmen
+WSU,Washington Nationals,1884,Washington Nationals
+BR3,Brooklyn Grays,1885,Los Angeles Dodgers
+LS2,Louisville Colonels,1885,Louisville Colonels
+NY1,New York Giants,1885,San Francisco Giants
+SL5,St. Louis Maroons,1885,St. Louis Maroons
+KCN,Kansas City Cowboys,1886,Kansas City Cowboys
+WS8,Washington Nationals,1886,Washington Nationals
+CL3,Cleveland Blues,1887,Cleveland Spiders
+IN3,Indianapolis Hoosiers,1887,Indianapolis Hoosiers
+PIT,Pittsburg Alleghenys,1887,Pittsburgh Pirates
+BR3,Brooklyn Bridegrooms,1888,Los Angeles Dodgers
+KC2,Kansas City Cowboys,1888,Kansas City Cowboys
+CL4,Cleveland Spiders,1889,Cleveland Spiders
+CL6,Columbus Solons,1889,Columbus Solons
+BFP,Buffalo Bisons,1890,Buffalo Bisons
+BL3,Baltimore Orioles,1890,Baltimore Orioles
+BR4,Brooklyn Gladiators,1890,Brooklyn Gladiators
+BRO,Brooklyn Bridegrooms,1890,Los Angeles Dodgers
+BRP,Brooklyn Ward's Wonders,1890,Brooklyn Ward's Wonders
+BSP,Boston Reds,1890,Boston Reds
+CHN,Chicago Colts,1890,Chicago Cubs
+CHP,Chicago Pirates,1890,Chicago Pirates
+CIN,Cincinnati Reds,1890,Cincinnati Reds
+CLP,Cleveland Infants,1890,Cleveland Infants
+NYP,New York Giants,1890,New York Giants
+PHI,Philadelphia Phillies,1890,Philadelphia Phillies
+PHP,Philadelphia Athletics,1890,Philadelphia Athletics
+PTP,Pittsburgh Burghers,1890,Pittsburgh Burghers
+RC2,Rochester Broncos,1890,Rochester Broncos
+SR2,Syracuse Stars,1890,Syracuse Stars
+TL2,Toledo Maumees,1890,Toledo Maumees
+BRO,Brooklyn Grooms,1891,Los Angeles Dodgers
+BS2,Boston Reds,1891,Boston Reds
+CN3,Cincinnati Kelly's Killers,1891,Cincinnati Kelly's Killers
+ML3,Milwaukee Brewers,1891,Milwaukee Brewers
+PIT,Pittsburgh Pirates,1891,Pittsburgh Pirates
+WS9,Washington Statesmen,1891,Washington Senators
+BLN,Baltimore Orioles,1892,Baltimore Orioles
+LS3,Louisville Colonels,1892,Louisville Colonels
+SLN,St. Louis Browns,1892,St. Louis Cardinals
+WAS,Washington Senators,1892,Washington Senators
+CHN,Chicago Orphans,1898,Chicago Cubs
+BRO,Brooklyn Superbas,1899,Los Angeles Dodgers
+SLN,St. Louis Perfectos,1899,St. Louis Cardinals
+SLN,St. Louis Cardinals,1900,St. Louis Cardinals
+BLA,Baltimore Orioles,1901,New York Yankees
+BOS,Boston Americans,1901,Boston Red Sox
+CHA,Chicago White Sox,1901,Chicago White Sox
+CLE,Cleveland Blues,1901,Cleveland Indians
+DET,Detroit Tigers,1901,Detroit Tigers
+MLA,Milwaukee Brewers,1901,Baltimore Orioles
+PHA,Philadelphia Athletics,1901,Oakland Athletics
+WS1,Washington Senators,1901,Minnesota Twins
+CLE,Cleveland Bronchos,1902,Cleveland Indians
+SLA,St. Louis Browns,1902,Baltimore Orioles
+CHN,Chicago Cubs,1903,Chicago Cubs
+CLE,Cleveland Naps,1903,Cleveland Indians
+NYA,New York Highlanders,1903,New York Yankees
+BSN,Boston Doves,1907,Atlanta Braves
+BOS,Boston Red Sox,1908,Boston Red Sox
+BRO,Brooklyn Dodgers,1911,Los Angeles Dodgers
+BSN,Boston Rustlers,1911,Atlanta Braves
+BSN,Boston Braves,1912,Atlanta Braves
+NYA,New York Yankees,1913,New York Yankees
+BLF,Baltimore Terrapins,1914,Baltimore Terrapins
+BRF,Brooklyn Tip-Tops,1914,Brooklyn Tip-Tops
+BRO,Brooklyn Robins,1914,Los Angeles Dodgers
+BUF,Buffalo Buffeds,1914,Buffalo Bisons
+CHF,Chicago Chi-Feds,1914,Chicago Whales
+IND,Indianapolis Hoosiers,1914,Newark Pepper
+KCF,Kansas City Packers,1914,Kansas City Packers
+PTF,Pittsburgh Rebels,1914,Pittsburgh Rebels
+SLF,St. Louis Terriers,1914,St. Louis Terriers
+BUF,Buffalo Blues,1915,Buffalo Bisons
+CHF,Chicago Whales,1915,Chicago Whales
+CLE,Cleveland Indians,1915,Cleveland Indians
+NEW,Newark Pepper,1915,Newark Pepper
+BSN,Boston Bees,1936,Atlanta Braves
+PHI,Philadelphia Blue Jays,1943,Philadelphia Phillies
+ML1,Milwaukee Braves,1953,Atlanta Braves
+BAL,Baltimore Orioles,1954,Baltimore Orioles
+CIN,Cincinnati Redlegs,1954,Cincinnati Reds
+KC1,Kansas City Athletics,1955,Oakland Athletics
+LAN,Los Angeles Dodgers,1958,Los Angeles Dodgers
+SFN,San Francisco Giants,1958,San Francisco Giants
+LAA,Los Angeles Angels,1961,Los Angeles Angels of Anaheim
+MIN,Minnesota Twins,1961,Minnesota Twins
+WS2,Washington Senators,1961,Texas Rangers
+HOU,Houston Colt .45's,1962,Houston Astros
+NYN,New York Mets,1962,New York Mets
+CAL,California Angels,1965,Los Angeles Angels of Anaheim
+HOU,Houston Astros,1965,Houston Astros
+ATL,Atlanta Braves,1966,Atlanta Braves
+OAK,Oakland Athletics,1968,Oakland Athletics
+KCA,Kansas City Royals,1969,Kansas City Royals
+MON,Montreal Expos,1969,Washington Nationals
+SDN,San Diego Padres,1969,San Diego Padres
+SE1,Seattle Pilots,1969,Milwaukee Brewers
+ML4,Milwaukee Brewers,1970,Milwaukee Brewers
+TEX,Texas Rangers,1972,Texas Rangers
+SEA,Seattle Mariners,1977,Seattle Mariners
+TOR,Toronto Blue Jays,1977,Toronto Blue Jays
+COL,Colorado Rockies,1993,Colorado Rockies
+FLO,Florida Marlins,1993,Florida Marlins
+ANA,Anaheim Angels,1997,Los Angeles Angels of Anaheim
+ARI,Arizona Diamondbacks,1998,Arizona Diamondbacks
+MIL,Milwaukee Brewers,1998,Milwaukee Brewers
+TBA,Tampa Bay Devil Rays,1998,Tampa Bay Rays
+LAA,Los Angeles Angels of Anaheim,2005,Los Angeles Angels of Anaheim
+WAS,Washington Nationals,2005,Washington Nationals
+TBA,Tampa Bay Rays,2008,Tampa Bay Rays
+MIA,Miami Marlins,2012,Florida Marlins
