@@ -1,95 +1,79 @@
 CREATE TABLE People (
 peopleID varchar (255) primary key,
-givenName varchar (255),
-lastName varchar (255),
-birthDate date,
-birthCountry varchar (255),
+given_name varchar (255),
+last_name varchar (255),
+birthdate date,
+birth_country varchar (255),
 weight float,
 height float,
 bats varchar (255),
 throws varchar (255),
 debut date,
-finalGame date
+final_game date
 );
 
 
 copy People FROM '/home/cc3201/cc3201/DatosOrdenados/People/People.csv' DELIMITER ',' CSV HEADER;
 
 
-CREATE TABLE Parks (
-key varchar (255),
-name varchar (255),
-alias varchar (255),
-city varchar (255),
-state varchar (255),
-country varchar (255)
--- primary key (key)
+-- IDEA 1 :
+-- Team( teamID,  name , season_debut, franchise_name )
+-- Season( year, league,  division,  division_winner) 
+-- PostSeason( year, league,  league_champion, ws_champion) 
+-- TeamSeason( year,  team,   league, division, g ,   g_home,  wins, loses,  division_rank, park, attendance ,  BPF,  PPF ) 
 
+
+CREATE TABLE Teams(
+teamid varchar (255) primary key,
+team_name varchar (255),
+season_debut varchar(255),
+franchise_name varchar(255) 
 );
 
-CREATE TABLE TeamFranchises (
-franchID varchar (255) primary key,
-franchName varchar (255),
-active varchar (255),
-NAassoc varchar (255)
--- primary key (franchID)
+copy Teams FROM '/home/cc3201/cc3201/DatosOrdenados/Teams/Teams.csv' DELIMITER ',' CSV HEADER;
 
+
+CREATE TABLE Team_Season(
+
+year int,
+teamid varchar(255) references Teams(teamid) ,
+league varchar(255),
+division varchar(255), 
+games int, 
+games_at_home int,
+wins int,
+loses int, 
+div_rank int, 
+park varchar(255), 
+attendance int, 
+BPF int, 
+PP int, 
+primary key (year, teamid)
 );
 
-CREATE TABLE Teams (
-yearID int,
-lgID varchar (255),
-divID varchar (255),
-teamID varchar (255),
-name varchar (255),
-franchID varchar (255),
-Rank int,
-G int,
-GHome int,
-W int,
-L int,
-DivWin varchar (255),
-WCWin varchar (255),
-LgWin varchar (255),
-WSWin varchar (255),
-R int,
-AB int,
-H int,
-"2B" int,
-"3B" int,
-HR int,
-BB int,
-SO int,
-SB int,
-CS int,
-HBP int,
-SF int,
-RA int,
-ER int,
-ERA float,
-CG int,
-SHO int,
-SV int,
-IPOuts int,
-HA int,
-HRA int,
-BBA int,
-SOA int,
-E int,
-DP int,
-FP float,
-park varchar (255),
-attendance int,
-BPF int,
-PPF int,
-primary key (yearID, teamID)
+CREATE TABLE Season(
+year int,
+league varchar(255),
+division varchar(255), 
+division_winner varchar (255),
+primary key(year, league, division),
+foreign key(year, division_winner) references Team_Season(year, teamid)
 );
 
-copy teans FROM '/home/cc3201/cc3201/DatosOrdenados/Teams/Teams.csv' DELIMITER ',' CSV HEADER;
+
+CREATE TABLE postSeason(
+year int,
+league varchar(255),
+league_winner varchar (255),
+ws_winner varchar(255), 
+primary key(year, league),
+foreign key(year, league_winner) references Team_Season(year, teamid)
+);
+
 
 
 CREATE TABLE PlayerAppearances (
-yearID int,
+year int,
 teamID varchar (255),
 playerID varchar (255),
 --lgID varchar (255),
@@ -110,8 +94,8 @@ G_of int,
 G_dh int,
 G_ph int,
 G_pr int,
-primary key (yearID, teamID, playerID),
-foreign key (teamID, yearID) references Teams(teamID, yearID),
+primary key (year, teamID, playerID),
+foreign key (teamID, year) references Team_Season(teamID, year),
 foreign key (playerID) references People(peopleID)
 );
 
@@ -120,7 +104,7 @@ copy PlayerAppearances FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Appearan
 
 CREATE TABLE Batting (
 playerID varchar (255),
-yearID int,
+year int,
 stint int,
 teamID varchar (255),
 -- lgID varchar (255),
@@ -141,8 +125,8 @@ HBP int,
 SH int,
 SF int,
 GIDP int,
-primary key ( playerID, yearID, teamID, stint),
-foreign key (teamID, yearID) references Teams(teamID, yearID),
+primary key ( playerID, year, teamID, stint),
+foreign key (teamID, year) references Team_Season(teamID, year),
 foreign key (playerID) references People(peopleID)
 );
 copy batting FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Batting.csv' DELIMITER ',' CSV HEADER;
@@ -150,7 +134,7 @@ copy batting FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Batting.csv' DELIM
 
 CREATE TABLE Fielding (
 playerID varchar (255),
-yearID int,
+year int,
 stint int,
 teamID varchar (255),
 -- lgID varchar (255),
@@ -167,8 +151,8 @@ WP int,
 SB int,
 CS int,
 ZR int,
-primary key (playerID, yearID, teamID , stint, pos),
-foreign key (teamID, yearID) references Teams(teamID, yearID),
+primary key (playerID, year, teamID , stint, pos),
+foreign key (teamID, year) references Team_Season(teamID, year),
 foreign key (playerID) references People(peopleID)
 );
 
@@ -176,7 +160,7 @@ copy fielding FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Fielding.csv' DEL
 
 CREATE TABLE Pitching (
 playerID varchar (255),
-yearID int,
+year int,
 stint int,
 teamID varchar (255),
 -- lgID varchar (255),
@@ -205,8 +189,8 @@ R int,
 SH int,
 SF int,
 GIDP int,
-primary key (yearID, teamID, playerID),
-foreign key (teamID, yearID) references Teams(teamID, yearID),
+primary key (year, teamID, playerID),
+foreign key (teamID, year) references Team_Season(teamID, year),
 foreign key (playerID) references People(peopleID)
 );
 
@@ -214,7 +198,7 @@ copy pitching FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Pitching.csv' DEL
 
 CREATE TABLE Managers (
 playerID varchar (255),
-yearID int,
+year int,
 teamID varchar (255),
 -- lgID varchar (255),
 inseason int,
@@ -223,79 +207,92 @@ W int,
 L int,
 rank int,
 plyrMgr varchar (255),
-primary key (yearID, teamID, playerID),
-foreign key (teamID, yearID) references Teams(teamID, yearID),
+primary key (year, teamID, playerID),
+foreign key (teamID, year) references Team_Season(teamID, year),
 foreign key (playerID) references People(peopleID)
 );
 copy pitching FROM '/home/cc3201/cc3201/DatosOrdenados/Manager/Managers.csv' DELIMITER ',' CSV HEADER;
 
 
-CREATE TABLE AwardsManagerVotes (
-awardID varchar (255), 
-yearID int,
-lgID varchar (255),
-playerID varchar (255),
-pointsWon int,
-pointsMax int,
-votesFirst int,
-primary key (awardID, yearID, lgID, playerID),
-foreign key (playerID) references People(peopleID)
 
+CREATE TABLE Awards(
+	personID varchar (255),
+	awardID varchar (255),
+	year int,
+	league varchar (255),
+	tie varchar (255),
+	notes varchar (255),
+	category varchar(255),
+	primary key (awardID, year, league, personID),
+	foreign key (personID) references People(peopleID)
 );
 
-CREATE TABLE AwardsManager (
-playerID varchar (255),
-awardID varchar (255),
-yearID int,
-lgID varchar (255),
-tie varchar (255),
-notes varchar (255),
-primary key (awardID, yearID, lgID, playerID),
-foreign key (playerID) references People(peopleID)
-
-);
-
-CREATE TABLE AwardsPlayerVotes (
-awardID varchar (255),
-yearID int,
-lgID varchar (255),
-playerID varchar (255),
-pointsWon int,
-pointsMax int,
-votesFirst int,
-primary key (awardID, yearID, lgID, playerID),
-foreign key (playerID) references People(peopleID)
-
-);
-
-CREATE TABLE AwardsPlayer (
-playerID varchar (255),
-awardID varchar (255),
-yearID int,
-lgID varchar (255),
-tie varchar (255),
-notes varchar (255),
-primary key (awardID, yearID, lgID, playerID),
-foreign key (playerID) references People(peopleID)
 
 
-);
+-- CREATE TABLE AwardsManagerVotes (
+-- awardID varchar (255), 
+-- year int,
+-- league varchar (255),
+-- playerID varchar (255),
+-- pointsWon int,
+-- pointsMax int,
+-- votesFirst int,
+-- primary key (awardID, year, league, playerID),
+-- foreign key (playerID) references People(peopleID)
+
+-- );
+
+-- CREATE TABLE AwardsManager (
+-- playerID varchar (255),
+-- awardID varchar (255),
+-- year int,
+-- league varchar (255),
+-- tie varchar (255),
+-- notes varchar (255),
+-- primary key (awardID, year, league, playerID),
+-- foreign key (playerID) references People(peopleID)
+
+-- );
+
+-- CREATE TABLE AwardsPlayerVotes (
+-- awardID varchar (255),
+-- year int,
+-- league varchar (255),
+-- playerID varchar (255),
+-- pointsWon int,
+-- pointsMax int,
+-- votesFirst int,
+-- primary key (awardID, year, league, playerID),
+-- foreign key (playerID) references People(peopleID)
+
+-- );
+
+-- CREATE TABLE AwardsPlayer (
+-- playerID varchar (255),
+-- awardID varchar (255),
+-- year int,
+-- league varchar (255),
+-- tie varchar (255),
+-- notes varchar (255),
+-- primary key (awardID, year, league, playerID),
+-- foreign key (playerID) references People(peopleID)
+-- );
 
 CREATE TABLE Salaries (
-yearID int,
+year int,
 teamID varchar (255),
-lgID varchar (255),
+league varchar (255),
 playerID varchar (255),
 salary int,
-primary key(playerID, yearID, teamID),
-foreign key (teamID, yearID) references Teams(teamID, yearID),
+primary key(playerID, year, teamID),
+foreign key (teamID, year) references Team_Season(teamID, year),
 foreign key (playerID) references People(peopleID)
 
 );
 
 CREATE TABLE HallOfFame (
 playerID varchar(255),
-yearID int,
+year int,
 votedBy varchar(255),
 ballots int,
 needed int,
@@ -303,7 +300,7 @@ votes int,
 inducted varchar(255),
 category varchar(255),
 needed_note varchar(255),
-primary key (yearID, playerID, category, inducted),
+primary key (year, playerID, category, inducted),
 foreign key (playerID) references People(peopleID)
 
 
@@ -349,3 +346,79 @@ foreign key (playerID) references People(peopleID)
 
 
 ## Fielding: - Se agrega pos a llave primaria por 4
+
+
+
+
+-- CREATE TABLE Team (
+-- year int,
+-- lgID varchar (255),
+-- divID varchar (255),
+-- teamID varchar (255),
+-- name varchar (255),
+-- franchID varchar (255),
+-- Rank int,
+-- G int,
+-- GHome int,
+-- W int,
+-- L int,
+-- DivWin varchar (255),
+-- WCWin varchar (255),
+-- LgWin varchar (255),
+-- WSWin varchar (255),
+-- R int,
+-- AB int,
+-- H int,
+-- "2B" int,
+-- "3B" int,
+-- HR int,
+-- BB int,
+-- SO int,
+-- SB int,
+-- CS int,
+-- HBP int,
+-- SF int,
+-- RA int,
+-- ER int,
+-- ERA float,
+-- CG int,
+-- SHO int,
+-- SV int,
+-- IPOuts int,
+-- HA int,
+-- HRA int,
+-- BBA int,
+-- SOA int,
+-- E int,
+-- DP int,
+-- FP float,
+-- park varchar (255),
+-- attendance int,
+-- BPF int,
+-- PPF int,
+-- primary key (yearID, teamID)
+-- );
+
+-- copy teans FROM '/home/cc3201/cc3201/DatosOrdenados/Teams/Teams.csv' DELIMITER ',' CSV HEADER;
+
+
+-- CREATE TABLE Parks (
+-- key varchar (255),
+-- name varchar (255),
+-- alias varchar (255),
+-- city varchar (255),
+-- state varchar (255),
+-- country varchar (255)
+-- -- primary key (key)
+
+-- );
+
+-- CREATE TABLE team_franchises (
+-- franchID varchar (255) primary key,
+-- franchName varchar (255),
+-- active varchar (255),
+-- NAassoc varchar (255)
+-- -- primary key (franchID)
+-- );
+
+
