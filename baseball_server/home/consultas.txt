@@ -1,0 +1,38 @@
+SELECT  A1.playerid, P.given_name, P.last_name, A1.teamid, T.team_name, min(A1.year) as primera_temporada, max(A1.year) as ultima_temporada
+from baseball.player_season_appearances A1, baseball.teams T, baseball.people P
+
+where A1.teamid = T.teamid
+and T.team_name  = (
+    select team_name from teams T2 where T2.season_debut < A1.year and T2.teamid = A1.teamid order by T2.season_debut desc limit 1
+)
+
+and P.peopleid = A1.playerid
+
+and P.given_name <> $1
+and P.last_name <> $2
+
+and ROW(A1.teamid, A1.year) in
+    (select distinct A.teamid, A.year
+        from baseball.people P, baseball.player_season_appearances A 
+        where P.last_name = $2
+        and P.given_name = $1
+        and P.peopleid=A.playerid 
+    )
+
+group by (A1.playerid,A1.teamid,T.team_name, P.given_name, P.last_name)
+order by A1.playerid;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select * from teams where season_debut<1915 and teamid='NYA' order by season_debut desc limit 1;

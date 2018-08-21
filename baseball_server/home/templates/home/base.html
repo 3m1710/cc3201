@@ -19,10 +19,23 @@
 <div id="superiorbar">
 <ul>
   <li><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'jugadores' %}"> Jugadores </a></li>
+  <li><a href="{% url 'managers' %}"> Managers </a></li>
+  <li><a href="{% url 'equipo' %}"> Equipos </a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Consultas</a>
+    <div class="dropdown-content">
+      <a href="{% url 'consultas' 1%}">Consulta 1</a>
+      <a href="{% url 'consultas' 2%}">Consulta 2</a>
+      <a href="{% url 'consultas' 3%}">Consulta 3</a>
+      <a href="{% url 'consultas' 4%}">Consulta 4</a>
+      <a href="{% url 'consultas' 5%}">Consulta 5</a>
+
+    </div>
+  </li>
 
   <!-- <li><a href="{% url 'BD' %}">Base Datos</a></li> -->
   
-  <li><a href="{% url 'jugadores' %}"> Buscar Jugadores </a></li>
   
   <li style="float:right"><a class="active" href="{% url 'about' %}">About</a></li>
 </ul>
