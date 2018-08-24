@@ -20,7 +20,7 @@ def team(request):
     return render(request, 'home/about.html')
 
 def consultas(request, query_id):
-    dic = {'1':consulta1, '2':consulta2, '3': consulta3}
+    dic = {'1':consulta1, '2':consulta2, '3': consulta3, '4':consulta4, '5':consulta5}
     if query_id in dic:
         return dic[query_id].as_view()(request)
     else:
@@ -91,8 +91,9 @@ class manager(ConsultaGeneral):
 
         with connection.cursor() as cursor:
             
-            if lastname=="":
-                cursor.execute("prepare consulta_manager (text) as " + """SELECT  P.peopleid, P.last_name, P.given_name, P.birthdate, P.birth_country, P.debut,  min(M.year) as man_debut
+            if lastname=="" and name=="":
+                print("HERE")
+                cursor.execute("prepare consulta_manager as " + """SELECT  P.peopleid, P.last_name, P.given_name, P.birthdate, P.birth_country, P.debut,  min(M.year) as man_debut
                                   FROM baseball.people P, baseball.manager M 
                                   WHERE M.playerid = P.peopleid  
                                   group by P.peopleid 
@@ -187,7 +188,7 @@ class teams(ConsultaGeneral):
             
             if equipo:
                 equipo = "%" + equipo+ "%"
-                cursor.execute("prepare consulta_jugador (text) as " + """
+                cursor.execute("prepare consulta_teams (text) as " + """
                                 SELECT  T.teamid, T.team_name, T.franchise_name, T.season_debut, max(year) as last_season FROM baseball.teams T, baseball.team_season S
                                 where S.teamid = T.teamid
                                 AND T.teamid like $1
@@ -198,7 +199,7 @@ class teams(ConsultaGeneral):
 
             elif nombre:
                 nombre = "%" + nombre+ "%"
-                cursor.execute("prepare consulta_jugador (text) as "+ """
+                cursor.execute("prepare consulta_teams (text) as "+ """
                                 SELECT  T.teamid, T.team_name, T.franchise_name, T.season_debut, max(year) as last_season FROM baseball.teams T, baseball.team_season S
                                 where S.teamid = T.teamid
                                 AND T.team_name like $1
@@ -207,7 +208,7 @@ class teams(ConsultaGeneral):
                 cursor.execute("execute consulta_teams (%s) ",[nombre])
 
             else:
-                cursor.execute("prepare consulta_jugador as "+ 
+                cursor.execute("prepare consulta_teams as "+ 
                                 """SELECT  T.teamid, T.team_name, T.franchise_name, T.season_debut, max(year) as last_season FROM baseball.teams T, baseball.team_season S
                                 where S.teamid = T.teamid
                                 GROUP BY ( T.teamid, T.team_name, T.season_debut)""")
@@ -318,45 +319,82 @@ class consulta3(ConsultaGeneral):
             results = dictfetchall(cursor)
         return results
 
-# class consulta4(ConsultaGeneral):
-#     msg = ' <h3> Consulta 4 ?   </h3>'
-#     # template_name = 'home/consultas.html'
-#     # my_form = forms.consulta4
-#     # my_table = Tabla4
+class consulta4(ConsultaGeneral):
+    msg = ' <h3> Desempeño de Equipos por año   </h3>'
+    template_name = 'home/consultas.html'
+    my_form = forms.consulta2
+    my_table = Tabla4
 
-#     def consultar(self, form):
+    def consultar(self, form):
 
 
-#         with connection.cursor() as cursor:
+        with connection.cursor() as cursor:
             
-#             cursor.execute("prepare consulta4  as " + """    
-    
-#                 <  Put Consulta 4 Here>
-    
-#             """)
-#             cursor.execute("execute consulta4 (%s,%s)",[args])
-#             results = dictfetchall(cursor)
-#         return results
+            team = form.cleaned_data["equipo"]
 
-# class consulta5(ConsultaGeneral):
-#     msg = ' <h3> Consulta 5 ?   </h3>'
-#     # template_name = 'home/consultas.html'
-#     # my_form = forms.consulta5
-#     # my_table = Tabla5
+            cursor.execute("prepare consulta4  as " + """    
 
-#     def consultar(self, form):
-
-
-#         with connection.cursor() as cursor:
-            
-#             cursor.execute("prepare consulta5  as " + """    
+                SELECT A.year, A.dpp as d_players, B.dpt as d_team from (
+                
+                select T.year, T.team_name, round(sum(desempenho)/ count(desempenho),2) as dpp from team_season T, 
+                (select playerid, year, teamid, round((h*1.0 / ab),2) as desempenho from player_season_batting
+                where ab > 0) P
+                where P.teamid=T.teamid
+                and P.year=T.year
+                group by T.team_name, T.year
+                order by T.team_name, T.year) A, 
+                (select T.year, T.team_name, round((T.wins*1.0 / T.games),2) as dpt from team_season T
+                order by T.team_name, T.year) B
+                where A.year = B.year
+                and A.team_name = B.team_name
+                and A.team_name = $1;
     
-#                 <  Put Consulta 5 Here>
-    
-#             """)
-#             cursor.execute("execute consulta5 (%s,%s)",[args])
-#             results = dictfetchall(cursor)
-#         return results
+            """)
+            cursor.execute("execute consulta4 (%s)",[team])
+            results = dictfetchall(cursor)
+        return results
+
+class consulta5(ConsultaGeneral):
+    msg = ' <h3> Jugadores Zurdos por Liga </h3>'
+    template_name = 'home/consultas.html'
+    my_form = forms.consulta5
+    my_table = Tabla5
+
+    def consultar(self, form):
+
+
+        with connection.cursor() as cursor:
+            liga = form.cleaned_data["league"]  
+            cursor.execute("prepare consulta5  as " + """    
+                SELECT L.team_name, L.zurdos, R.diestros
+                from
+
+                (select T.team_name, count(P.bats) as zurdos
+                from teams T, people P, postseason S, player_season_appearances A
+                where P.bats = 'L'
+                and P.peopleid= A.playerid
+                and A.teamid=T.teamid
+                and S.league_winner=T.teamid
+                and S.league = $1
+                group by T.team_name) as L
+
+                inner join
+
+                (select T.team_name, count(P.bats) as diestros
+                from teams T, people P, postseason S, player_season_appearances A
+                where P.bats = 'R'
+                and P.peopleid= A.playerid
+                and A.teamid=T.teamid
+                and S.league_winner=T.teamid
+                and S.league = $1
+                group by T.team_name) as R
+
+                on L.team_name = R.team_name
+                order by l.zurdos desc;
+            """)
+            cursor.execute("execute consulta5 (%s)",[liga])
+            results = dictfetchall(cursor)
+        return results
         
 
 

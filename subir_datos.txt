@@ -3,7 +3,7 @@ copy Teams FROM '/home/cc3201/cc3201/DatosOrdenados/Teams/Teams2.csv' DELIMITER 
 copy team_season FROM '/home/cc3201/cc3201/DatosOrdenados/Teams/teams_season.csv' DELIMITER ',' CSV HEADER;
 copy season FROM '/home/cc3201/cc3201/DatosOrdenados/Teams/Season.csv' DELIMITER ',' CSV HEADER;
 copy postseason FROM '/home/cc3201/cc3201/DatosOrdenados/Teams/Postseason.csv' DELIMITER ',' CSV HEADER;
-
+w
 
 copy Player_season_Appearances FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Appearances.csv' DELIMITER ',' CSV HEADER;
 copy Player_Season_Batting FROM '/home/cc3201/cc3201/DatosOrdenados/Jugador/Batting.csv' DELIMITER ',' CSV HEADER;

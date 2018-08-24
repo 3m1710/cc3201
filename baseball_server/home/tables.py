@@ -80,6 +80,26 @@ class Tabla3(tables.Table):
     class Meta:
         attrs = {"class": "paleblue"} 
 
+class Tabla4(tables.Table):
+    #name = tables.Column()
+
+    year    = tables.Column("año")
+    d_players = tables.Column("Desempeño de Jugadores")
+    d_team = tables.Column("Wins / Loses")
+
+    class Meta:
+        attrs = {"class": "paleblue"} 
+
+class Tabla5(tables.Table):
+    #name = tables.Column()
+
+    team_name    = tables.Column("Equipo")
+    zurdos = tables.Column("#Zurdos")
+    diestros = tables.Column("#Diestros")
+
+    class Meta:
+        attrs = {"class": "paleblue"} 
+
 
 class Teams(tables.Table):
     #name = tables.Column()

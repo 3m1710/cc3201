@@ -51,7 +51,7 @@ final_game date
 CREATE TABLE Teams(
 teamid varchar (255),
 team_name varchar (255),
-season_debut varchar(255),
+season_debut int,
 franchise_name varchar(255),
 
 primary key(teamid, team_name)
