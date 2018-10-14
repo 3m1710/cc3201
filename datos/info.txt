@@ -1,0 +1,30 @@
+####### Diseño Relacional #########
+
+
+# Estadisticas y Jugador!
+
+## Tabla 1
+Tabla de Jugadores/Personas (incluye managers de equipos)
+
+
+- 1. ID
+- 2. Nacimiento
+	- 2.1 Fecha
+	- 2.2 Lugar
+- 3. Muerte
+	- 3.1 Fecha
+	- 3.2 Lugar
+
+- 4. Nombres 
+
+- 5. Players biometrics
+	- 5.1 Peso
+	- 5.2 Altura
+	- 5.3 Brazo de Bateo
+	- 5.4 Brazo de Lanzamiento
+
+- 6. Debut
+
+
+
+##

