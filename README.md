@@ -11,7 +11,7 @@ Se utilizaron datos de sabermetrics de baseball extraídos de [https://github.co
 
 Se implementó una interfaz web para realizar consultas a la base de datos, utilizando django.
 
-###License
+### License
 This work is licensed under a Creative Commons Attribution-ShareAlike
 3.0 Unported License.  For details see:
 http://creativecommons.org/licenses/by-sa/3.0/
