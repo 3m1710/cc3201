@@ -1,0 +1,45 @@
+P1
+
+insert into lab8_p.eval values ('g8', 'The Lord of the Rings: The Fellowship of the Ring',2001,'good',10);
+insert into lab8_p.eval values ('g8', 'The Lord of the Rings: The Return of the King',2003,'good',10);
+
+
+P2
+
+create view lab8_p.g8_p3b as 
+select * from lab8_p.eval
+where p_nombre in (
+select p_nombre from lab8_p.eval
+where g_nombre = 'g8');
+
+create materialized view lab8_p.g8_p3b_mat as 
+select * from lab8_p.eval
+where p_nombre in (
+select p_nombre from lab8_p.eval
+where g_nombre = 'g8');
+
+
+
+insert into lab8_p.eval values ('g8', 'Jonas Brothers: The 3D Concert Experience',2009,'...',0);
+insert into lab8_p.eval values ('g8', 'Justin Bieber: Never Say Never',2011,'...',0);
+insert into lab8_p.eval values ('g8', 'Justin Bieber: Never Say Never',2011,'...',0);
+
+select * from lab8_p.g8_p3b;
+
+
+
+create function updateVMg8() returns trigger as $$
+begin
+	refresh materialized view lab8_p.g8_p3b_mat;
+	return new;
+end;
+$$ language plpgsql;
+
+
+create trigger actualizarVMg8
+after insert or update on lab8_p.eval
+for each row execute procedure updateVMg8();
+
+
+
+ delete from lab8_p.eval where g_nombre = 'g8';

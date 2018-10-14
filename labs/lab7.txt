@@ -1,0 +1,111 @@
+P1
+
+lab7.actor100: 856421 tuplas
+lab7.pelicula100: 72696 tuplas
+lab7.personaje100: 2170454 tuplas
+
+lab7.actor1k: 440234 tuplas
+lab7.pelicula1k: 22490 tuplas
+lab7.personaje1k: 944963 tuplas
+
+lab7.actor10k: 197219 tuplas
+lab7.pelicula10k: 6401 tuplas
+lab7.personaje10k: 372367 tuplas
+
+P2
+
+lab7: 
+
+queries/s:  1/409.569
+registros accedidos: 58  #(actual time=2.398..409.499 rows=58 loops=1)
+
+cc3201=> explain analyze select * from lab7.personaje100 where p_nombre='Pulp Fiction';
+                                                  QUERY PLAN                                                   
+---------------------------------------------------------------------------------------------------------------
+ Seq Scan on personaje100  (cost=0.00..49359.68 rows=46 width=49) (actual time=2.398..409.499 rows=58 loops=1)
+   Filter: ((p_nombre)::text = 'Pulp Fiction'::text)
+   Rows Removed by Filter: 2170396
+ Planning time: 0.086 ms
+ Execution time: 409.569 ms
+(5 rows)
+
+
+lab7_index:
+
+queries/s: 1/0.186
+registros accedidos: 58 #(actual time=0.045..0.138 rows=58 loops=1)
+cc3201=> explain analyze select * from lab7_index.personaje100 where p_nombre='Pulp Fiction';
+                                                            QUERY PLAN                                                             
+-----------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on personaje100  (cost=4.78..179.27 rows=45 width=49) (actual time=0.045..0.138 rows=58 loops=1)
+   Recheck Cond: ((p_nombre)::text = 'Pulp Fiction'::text)
+   Heap Blocks: exact=53
+   ->  Bitmap Index Scan on personaje100_pnombreanho  (cost=0.00..4.77 rows=45 width=0) (actual time=0.033..0.033 rows=58 loops=1)
+         Index Cond: ((p_nombre)::text = 'Pulp Fiction'::text)
+ Planning time: 0.104 ms
+ Execution time: 0.186 ms
+(7 rows)
+
+
+P3
+
+tablas 100
+
+lab7:
+rango:
+
+explain analyze
+select votos 
+from lab7.pelicula100
+where votos between 300 AND 600
+order by votos DESC;
+
+join:
+
+explain analyze
+select distinct p1.a_nombre 
+from lab7.personaje100 as p1, lab7.personaje100 as p2
+where p1.a_nombre = p2.a_nombre
+and p1.personaje != p2.personaje
+and p1.p_nombre=p2.p_nombre;
+
+consulta anidada:
+
+explain analyze
+select a_nombre from (
+select a_nombre, count(p_nombre)
+from lab7.personaje100, lab7.actor100
+where a_nombre = nombre and genero = 'F'
+group by a_nombre) as foo
+where count > 2
+order by count desc;
+
+
+lab7_index:
+rango:
+
+explain analyze
+select votos 
+from lab7_index.pelicula100 
+where votos between 300 AND 600
+order by votos DESC;
+
+join:
+
+explain analyze
+select distinct p1.a_nombre 
+from lab7_index.personaje100 as p1, lab7_index.personaje100 as p2
+where p1.a_nombre = p2.a_nombre
+and p1.personaje != p2.personaje
+and p1.p_nombre=p2.p_nombre;
+
+consulta anidada:
+
+explain analyze
+select a_nombre from (
+select a_nombre, count(p_nombre)
+from lab7_index.personaje100, lab7_index.actor100
+where a_nombre = nombre and genero = 'F'
+group by a_nombre) as foo
+where count > 2
+order by count desc;
